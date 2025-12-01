@@ -12,7 +12,7 @@ class SandboxCreateResponse(Sandbox):
     """Sandbox ID"""
 
     cpu: Optional[float] = None  # type: ignore
-    """CPU count"""
+    """CPU count (supports decimals)"""
 
     created_at: Optional[str] = None  # type: ignore
     """Creation timestamp"""
