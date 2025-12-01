@@ -25,8 +25,8 @@ class SandboxCreateParams(TypedDict, total=False):
 
 
 class Resources(TypedDict, total=False):
-    cpus: int
-    """Number of vCPUs"""
+    cpus: float
+    """Number of vCPUs (supports decimals, e.g., 0.25)"""
 
     memory: int
     """Memory size in MiB"""

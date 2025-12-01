@@ -46,7 +46,7 @@ class TestSandboxes:
             image="avmcodes/avm-default-sandbox",
             name="API Development",
             resources={
-                "cpus": 2,
+                "cpus": 0.25,
                 "memory": 512,
             },
             volumes=[
@@ -375,7 +375,7 @@ class TestAsyncSandboxes:
             image="avmcodes/avm-default-sandbox",
             name="API Development",
             resources={
-                "cpus": 2,
+                "cpus": 0.25,
                 "memory": 512,
             },
             volumes=[
