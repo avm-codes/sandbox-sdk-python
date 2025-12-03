@@ -79,6 +79,7 @@ pip install avm_sdk[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from sandbox_sdk import DefaultAioHttpClient
 from sandbox_sdk import AsyncSandboxSDK
@@ -86,7 +87,7 @@ from sandbox_sdk import AsyncSandboxSDK
 
 async def main() -> None:
     async with AsyncSandboxSDK(
-        api_key="My API Key",
+        api_key=os.environ.get("SANDBOX_SDK_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         sandboxes = await client.sandboxes.list()
