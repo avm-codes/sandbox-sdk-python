@@ -6,6 +6,8 @@ __all__ = ["Pagination"]
 
 
 class Pagination(BaseModel):
+    """Pagination metadata"""
+
     page: float
     """Current page number"""
 

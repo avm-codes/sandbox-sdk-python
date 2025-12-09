@@ -11,6 +11,8 @@ __all__ = ["VolumeListResponse", "Data", "DataMountedBy"]
 
 
 class DataMountedBy(BaseModel):
+    """Sandbox information if volume is in use (only for volumes)"""
+
     sandbox_id: str
     """Sandbox ID using this volume"""
 
