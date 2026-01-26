@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable
-from typing_extensions import Required, TypedDict
+from typing import Dict
+from typing_extensions import TypedDict
 
-__all__ = ["SandboxCreateParams", "Resources", "Volume"]
+__all__ = ["SandboxCreateParams", "Resources"]
 
 
 class SandboxCreateParams(TypedDict, total=False):
@@ -16,28 +16,23 @@ class SandboxCreateParams(TypedDict, total=False):
     """Docker image name (e.g., avmcodes/avm-default-sandbox)"""
 
     name: str
-    """Sandbox name"""
+    """
+    Custom sandbox name (auto-generated as sandbox-{user_id}-{timestamp} if not
+    provided)
+    """
 
     resources: Resources
 
-    volumes: Iterable[Volume]
-    """Volumes to attach to the sandbox"""
+    wait_for_ready: bool
+    """Wait for sandbox to be ready before returning"""
 
 
 class Resources(TypedDict, total=False):
-    cpus: float
-    """Number of vCPUs (supports decimals, e.g., 0.25)"""
+    cpus: int
+    """Number of CPUs (minimum: 1, 1 CPU = 0.25 Kubernetes vCPU)"""
 
     memory: int
     """Memory size in MiB"""
 
-
-class Volume(TypedDict, total=False):
-    mount_path: Required[str]
-    """Mount path in the container"""
-
-    volume_id: Required[str]
-    """Volume ID or Snapshot ID.
-
-    If a snapshot ID is provided, a new volume will be created from the snapshot.
-    """
+    storage: int
+    """Storage size in GB"""

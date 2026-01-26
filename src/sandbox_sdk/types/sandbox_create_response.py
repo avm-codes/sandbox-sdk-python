@@ -1,27 +1,28 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
-
 from .sandbox import Sandbox
 
 __all__ = ["SandboxCreateResponse"]
 
 
 class SandboxCreateResponse(Sandbox):
-    id: Optional[str] = None  # type: ignore
+    id: str  # type: ignore
     """Sandbox ID"""
 
-    cpu: Optional[float] = None  # type: ignore
-    """CPU count (supports decimals)"""
+    cpu: float  # type: ignore
+    """CPU count (API units, minimum 1)"""
 
-    created_at: Optional[str] = None  # type: ignore
+    created_at: str  # type: ignore
     """Creation timestamp"""
 
-    memory: Optional[float] = None  # type: ignore
-    """Memory size in MB"""
+    memory: float  # type: ignore
+    """Memory size in MiB"""
 
-    name: Optional[str] = None  # type: ignore
+    name: str  # type: ignore
     """Sandbox name"""
 
-    status: Optional[str] = None  # type: ignore
+    status: str  # type: ignore
     """Sandbox status"""
+
+    storage: float
+    """Storage size in GB"""

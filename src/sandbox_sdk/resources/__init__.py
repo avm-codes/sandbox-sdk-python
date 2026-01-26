@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .volumes import (
-    VolumesResource,
-    AsyncVolumesResource,
-    VolumesResourceWithRawResponse,
-    AsyncVolumesResourceWithRawResponse,
-    VolumesResourceWithStreamingResponse,
-    AsyncVolumesResourceWithStreamingResponse,
-)
 from .sandboxes import (
     SandboxesResource,
     AsyncSandboxesResource,
@@ -24,10 +16,4 @@ __all__ = [
     "AsyncSandboxesResourceWithRawResponse",
     "SandboxesResourceWithStreamingResponse",
     "AsyncSandboxesResourceWithStreamingResponse",
-    "VolumesResource",
-    "AsyncVolumesResource",
-    "VolumesResourceWithRawResponse",
-    "AsyncVolumesResourceWithRawResponse",
-    "VolumesResourceWithStreamingResponse",
-    "AsyncVolumesResourceWithStreamingResponse",
 ]

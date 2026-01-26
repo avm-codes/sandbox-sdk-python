@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import volumes, sandboxes
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, SandboxSDKError
 from ._base_client import (
@@ -29,6 +29,10 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+
+if TYPE_CHECKING:
+    from .resources import sandboxes
+    from .resources.sandboxes import SandboxesResource, AsyncSandboxesResource
 
 __all__ = [
     "Timeout",
@@ -43,11 +47,6 @@ __all__ = [
 
 
 class SandboxSDK(SyncAPIClient):
-    sandboxes: sandboxes.SandboxesResource
-    volumes: volumes.VolumesResource
-    with_raw_response: SandboxSDKWithRawResponse
-    with_streaming_response: SandboxSDKWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -102,10 +101,19 @@ class SandboxSDK(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.sandboxes = sandboxes.SandboxesResource(self)
-        self.volumes = volumes.VolumesResource(self)
-        self.with_raw_response = SandboxSDKWithRawResponse(self)
-        self.with_streaming_response = SandboxSDKWithStreamedResponse(self)
+    @cached_property
+    def sandboxes(self) -> SandboxesResource:
+        from .resources.sandboxes import SandboxesResource
+
+        return SandboxesResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> SandboxSDKWithRawResponse:
+        return SandboxSDKWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> SandboxSDKWithStreamedResponse:
+        return SandboxSDKWithStreamedResponse(self)
 
     @property
     @override
@@ -213,11 +221,6 @@ class SandboxSDK(SyncAPIClient):
 
 
 class AsyncSandboxSDK(AsyncAPIClient):
-    sandboxes: sandboxes.AsyncSandboxesResource
-    volumes: volumes.AsyncVolumesResource
-    with_raw_response: AsyncSandboxSDKWithRawResponse
-    with_streaming_response: AsyncSandboxSDKWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -272,10 +275,19 @@ class AsyncSandboxSDK(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.sandboxes = sandboxes.AsyncSandboxesResource(self)
-        self.volumes = volumes.AsyncVolumesResource(self)
-        self.with_raw_response = AsyncSandboxSDKWithRawResponse(self)
-        self.with_streaming_response = AsyncSandboxSDKWithStreamedResponse(self)
+    @cached_property
+    def sandboxes(self) -> AsyncSandboxesResource:
+        from .resources.sandboxes import AsyncSandboxesResource
+
+        return AsyncSandboxesResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncSandboxSDKWithRawResponse:
+        return AsyncSandboxSDKWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncSandboxSDKWithStreamedResponse:
+        return AsyncSandboxSDKWithStreamedResponse(self)
 
     @property
     @override
@@ -383,27 +395,55 @@ class AsyncSandboxSDK(AsyncAPIClient):
 
 
 class SandboxSDKWithRawResponse:
+    _client: SandboxSDK
+
     def __init__(self, client: SandboxSDK) -> None:
-        self.sandboxes = sandboxes.SandboxesResourceWithRawResponse(client.sandboxes)
-        self.volumes = volumes.VolumesResourceWithRawResponse(client.volumes)
+        self._client = client
+
+    @cached_property
+    def sandboxes(self) -> sandboxes.SandboxesResourceWithRawResponse:
+        from .resources.sandboxes import SandboxesResourceWithRawResponse
+
+        return SandboxesResourceWithRawResponse(self._client.sandboxes)
 
 
 class AsyncSandboxSDKWithRawResponse:
+    _client: AsyncSandboxSDK
+
     def __init__(self, client: AsyncSandboxSDK) -> None:
-        self.sandboxes = sandboxes.AsyncSandboxesResourceWithRawResponse(client.sandboxes)
-        self.volumes = volumes.AsyncVolumesResourceWithRawResponse(client.volumes)
+        self._client = client
+
+    @cached_property
+    def sandboxes(self) -> sandboxes.AsyncSandboxesResourceWithRawResponse:
+        from .resources.sandboxes import AsyncSandboxesResourceWithRawResponse
+
+        return AsyncSandboxesResourceWithRawResponse(self._client.sandboxes)
 
 
 class SandboxSDKWithStreamedResponse:
+    _client: SandboxSDK
+
     def __init__(self, client: SandboxSDK) -> None:
-        self.sandboxes = sandboxes.SandboxesResourceWithStreamingResponse(client.sandboxes)
-        self.volumes = volumes.VolumesResourceWithStreamingResponse(client.volumes)
+        self._client = client
+
+    @cached_property
+    def sandboxes(self) -> sandboxes.SandboxesResourceWithStreamingResponse:
+        from .resources.sandboxes import SandboxesResourceWithStreamingResponse
+
+        return SandboxesResourceWithStreamingResponse(self._client.sandboxes)
 
 
 class AsyncSandboxSDKWithStreamedResponse:
+    _client: AsyncSandboxSDK
+
     def __init__(self, client: AsyncSandboxSDK) -> None:
-        self.sandboxes = sandboxes.AsyncSandboxesResourceWithStreamingResponse(client.sandboxes)
-        self.volumes = volumes.AsyncVolumesResourceWithStreamingResponse(client.volumes)
+        self._client = client
+
+    @cached_property
+    def sandboxes(self) -> sandboxes.AsyncSandboxesResourceWithStreamingResponse:
+        from .resources.sandboxes import AsyncSandboxesResourceWithStreamingResponse
+
+        return AsyncSandboxesResourceWithStreamingResponse(self._client.sandboxes)
 
 
 Client = SandboxSDK
