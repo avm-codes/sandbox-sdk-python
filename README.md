@@ -126,8 +126,9 @@ client = SandboxSDK()
 
 sandbox = client.sandboxes.create(
     resources={
-        "cpus": 0.25,
+        "cpus": 1,
         "memory": 512,
+        "storage": 10,
     },
 )
 print(sandbox.resources)

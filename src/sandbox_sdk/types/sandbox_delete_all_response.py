@@ -27,3 +27,6 @@ class SandboxDeleteAllResponse(BaseModel):
 
     errors: Optional[List[Error]] = None
     """Array of deletion errors, if any"""
+
+    storage_deleted_count: Optional[float] = None
+    """Number of storage volumes deleted"""

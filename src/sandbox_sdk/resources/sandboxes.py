@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable
+from typing import Dict
 
 import httpx
 
 from ..types import (
     sandbox_list_params,
     sandbox_create_params,
+    sandbox_delete_params,
     sandbox_upload_params,
     sandbox_execute_params,
     sandbox_download_params,
@@ -69,7 +70,7 @@ class SandboxesResource(SyncAPIResource):
         image: str | Omit = omit,
         name: str | Omit = omit,
         resources: sandbox_create_params.Resources | Omit = omit,
-        volumes: Iterable[sandbox_create_params.Volume] | Omit = omit,
+        wait_for_ready: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -83,9 +84,10 @@ class SandboxesResource(SyncAPIResource):
 
           image: Docker image name (e.g., avmcodes/avm-default-sandbox)
 
-          name: Sandbox name
+          name: Custom sandbox name (auto-generated as sandbox-{user_id}-{timestamp} if not
+              provided)
 
-          volumes: Volumes to attach to the sandbox
+          wait_for_ready: Wait for sandbox to be ready before returning
 
           extra_headers: Send extra headers
 
@@ -103,7 +105,7 @@ class SandboxesResource(SyncAPIResource):
                     "image": image,
                     "name": name,
                     "resources": resources,
-                    "volumes": volumes,
+                    "wait_for_ready": wait_for_ready,
                 },
                 sandbox_create_params.SandboxCreateParams,
             ),
@@ -161,6 +163,9 @@ class SandboxesResource(SyncAPIResource):
         self,
         id: str,
         *,
+        create_snapshot: bool | Omit = omit,
+        keep_storage: bool | Omit = omit,
+        snapshot_name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -171,6 +176,12 @@ class SandboxesResource(SyncAPIResource):
         """
         Args:
           id: Sandbox ID
+
+          create_snapshot: Create snapshot before deleting storage
+
+          keep_storage: Keep storage after deletion (default: false - storage deleted)
+
+          snapshot_name: Custom name for the snapshot
 
           extra_headers: Send extra headers
 
@@ -184,6 +195,14 @@ class SandboxesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._delete(
             f"/v1/sandboxes/{id}/delete",
+            body=maybe_transform(
+                {
+                    "create_snapshot": create_snapshot,
+                    "keep_storage": keep_storage,
+                    "snapshot_name": snapshot_name,
+                },
+                sandbox_delete_params.SandboxDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -382,7 +401,7 @@ class AsyncSandboxesResource(AsyncAPIResource):
         image: str | Omit = omit,
         name: str | Omit = omit,
         resources: sandbox_create_params.Resources | Omit = omit,
-        volumes: Iterable[sandbox_create_params.Volume] | Omit = omit,
+        wait_for_ready: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -396,9 +415,10 @@ class AsyncSandboxesResource(AsyncAPIResource):
 
           image: Docker image name (e.g., avmcodes/avm-default-sandbox)
 
-          name: Sandbox name
+          name: Custom sandbox name (auto-generated as sandbox-{user_id}-{timestamp} if not
+              provided)
 
-          volumes: Volumes to attach to the sandbox
+          wait_for_ready: Wait for sandbox to be ready before returning
 
           extra_headers: Send extra headers
 
@@ -416,7 +436,7 @@ class AsyncSandboxesResource(AsyncAPIResource):
                     "image": image,
                     "name": name,
                     "resources": resources,
-                    "volumes": volumes,
+                    "wait_for_ready": wait_for_ready,
                 },
                 sandbox_create_params.SandboxCreateParams,
             ),
@@ -474,6 +494,9 @@ class AsyncSandboxesResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        create_snapshot: bool | Omit = omit,
+        keep_storage: bool | Omit = omit,
+        snapshot_name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -484,6 +507,12 @@ class AsyncSandboxesResource(AsyncAPIResource):
         """
         Args:
           id: Sandbox ID
+
+          create_snapshot: Create snapshot before deleting storage
+
+          keep_storage: Keep storage after deletion (default: false - storage deleted)
+
+          snapshot_name: Custom name for the snapshot
 
           extra_headers: Send extra headers
 
@@ -497,6 +526,14 @@ class AsyncSandboxesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._delete(
             f"/v1/sandboxes/{id}/delete",
+            body=await async_maybe_transform(
+                {
+                    "create_snapshot": create_snapshot,
+                    "keep_storage": keep_storage,
+                    "snapshot_name": snapshot_name,
+                },
+                sandbox_delete_params.SandboxDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

@@ -44,17 +44,13 @@ class TestSandboxes:
         sandbox = client.sandboxes.create(
             env_vars={"foo": "string"},
             image="avmcodes/avm-default-sandbox",
-            name="API Development",
+            name="my-project",
             resources={
-                "cpus": 0.25,
+                "cpus": 1,
                 "memory": 512,
+                "storage": 10,
             },
-            volumes=[
-                {
-                    "mount_path": "/data",
-                    "volume_id": "vol_x1y2z3a4b5c6d7e8",
-                }
-            ],
+            wait_for_ready=True,
         )
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
@@ -121,7 +117,18 @@ class TestSandboxes:
     @parametrize
     def test_method_delete(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.delete(
-            "id",
+            id="id",
+        )
+        assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_delete_with_all_params(self, client: SandboxSDK) -> None:
+        sandbox = client.sandboxes.delete(
+            id="id",
+            create_snapshot=True,
+            keep_storage=False,
+            snapshot_name="final-backup",
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
@@ -129,7 +136,7 @@ class TestSandboxes:
     @parametrize
     def test_raw_response_delete(self, client: SandboxSDK) -> None:
         response = client.sandboxes.with_raw_response.delete(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -141,7 +148,7 @@ class TestSandboxes:
     @parametrize
     def test_streaming_response_delete(self, client: SandboxSDK) -> None:
         with client.sandboxes.with_streaming_response.delete(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -156,7 +163,7 @@ class TestSandboxes:
     def test_path_params_delete(self, client: SandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.sandboxes.with_raw_response.delete(
-                "",
+                id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -373,17 +380,13 @@ class TestAsyncSandboxes:
         sandbox = await async_client.sandboxes.create(
             env_vars={"foo": "string"},
             image="avmcodes/avm-default-sandbox",
-            name="API Development",
+            name="my-project",
             resources={
-                "cpus": 0.25,
+                "cpus": 1,
                 "memory": 512,
+                "storage": 10,
             },
-            volumes=[
-                {
-                    "mount_path": "/data",
-                    "volume_id": "vol_x1y2z3a4b5c6d7e8",
-                }
-            ],
+            wait_for_ready=True,
         )
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
@@ -450,7 +453,18 @@ class TestAsyncSandboxes:
     @parametrize
     async def test_method_delete(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.delete(
-            "id",
+            id="id",
+        )
+        assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_delete_with_all_params(self, async_client: AsyncSandboxSDK) -> None:
+        sandbox = await async_client.sandboxes.delete(
+            id="id",
+            create_snapshot=True,
+            keep_storage=False,
+            snapshot_name="final-backup",
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
@@ -458,7 +472,7 @@ class TestAsyncSandboxes:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncSandboxSDK) -> None:
         response = await async_client.sandboxes.with_raw_response.delete(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -470,7 +484,7 @@ class TestAsyncSandboxes:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncSandboxSDK) -> None:
         async with async_client.sandboxes.with_streaming_response.delete(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -485,7 +499,7 @@ class TestAsyncSandboxes:
     async def test_path_params_delete(self, async_client: AsyncSandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sandboxes.with_raw_response.delete(
-                "",
+                id="",
             )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
