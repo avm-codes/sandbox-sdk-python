@@ -31,8 +31,7 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import volumes, sandboxes
-    from .resources.volumes import VolumesResource, AsyncVolumesResource
+    from .resources import sandboxes
     from .resources.sandboxes import SandboxesResource, AsyncSandboxesResource
 
 __all__ = [
@@ -107,12 +106,6 @@ class SandboxSDK(SyncAPIClient):
         from .resources.sandboxes import SandboxesResource
 
         return SandboxesResource(self)
-
-    @cached_property
-    def volumes(self) -> VolumesResource:
-        from .resources.volumes import VolumesResource
-
-        return VolumesResource(self)
 
     @cached_property
     def with_raw_response(self) -> SandboxSDKWithRawResponse:
@@ -289,12 +282,6 @@ class AsyncSandboxSDK(AsyncAPIClient):
         return AsyncSandboxesResource(self)
 
     @cached_property
-    def volumes(self) -> AsyncVolumesResource:
-        from .resources.volumes import AsyncVolumesResource
-
-        return AsyncVolumesResource(self)
-
-    @cached_property
     def with_raw_response(self) -> AsyncSandboxSDKWithRawResponse:
         return AsyncSandboxSDKWithRawResponse(self)
 
@@ -419,12 +406,6 @@ class SandboxSDKWithRawResponse:
 
         return SandboxesResourceWithRawResponse(self._client.sandboxes)
 
-    @cached_property
-    def volumes(self) -> volumes.VolumesResourceWithRawResponse:
-        from .resources.volumes import VolumesResourceWithRawResponse
-
-        return VolumesResourceWithRawResponse(self._client.volumes)
-
 
 class AsyncSandboxSDKWithRawResponse:
     _client: AsyncSandboxSDK
@@ -437,12 +418,6 @@ class AsyncSandboxSDKWithRawResponse:
         from .resources.sandboxes import AsyncSandboxesResourceWithRawResponse
 
         return AsyncSandboxesResourceWithRawResponse(self._client.sandboxes)
-
-    @cached_property
-    def volumes(self) -> volumes.AsyncVolumesResourceWithRawResponse:
-        from .resources.volumes import AsyncVolumesResourceWithRawResponse
-
-        return AsyncVolumesResourceWithRawResponse(self._client.volumes)
 
 
 class SandboxSDKWithStreamedResponse:
@@ -457,12 +432,6 @@ class SandboxSDKWithStreamedResponse:
 
         return SandboxesResourceWithStreamingResponse(self._client.sandboxes)
 
-    @cached_property
-    def volumes(self) -> volumes.VolumesResourceWithStreamingResponse:
-        from .resources.volumes import VolumesResourceWithStreamingResponse
-
-        return VolumesResourceWithStreamingResponse(self._client.volumes)
-
 
 class AsyncSandboxSDKWithStreamedResponse:
     _client: AsyncSandboxSDK
@@ -475,12 +444,6 @@ class AsyncSandboxSDKWithStreamedResponse:
         from .resources.sandboxes import AsyncSandboxesResourceWithStreamingResponse
 
         return AsyncSandboxesResourceWithStreamingResponse(self._client.sandboxes)
-
-    @cached_property
-    def volumes(self) -> volumes.AsyncVolumesResourceWithStreamingResponse:
-        from .resources.volumes import AsyncVolumesResourceWithStreamingResponse
-
-        return AsyncVolumesResourceWithStreamingResponse(self._client.volumes)
 
 
 Client = SandboxSDK
