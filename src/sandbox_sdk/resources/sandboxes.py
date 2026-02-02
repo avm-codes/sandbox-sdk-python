@@ -179,7 +179,7 @@ class SandboxesResource(SyncAPIResource):
 
           create_snapshot: Create snapshot before deleting storage
 
-          keep_storage: Keep storage after deletion (default: false - storage deleted)
+          keep_storage: @deprecated This option is ignored. Storage is always deleted.
 
           snapshot_name: Custom name for the snapshot
 
@@ -510,7 +510,7 @@ class AsyncSandboxesResource(AsyncAPIResource):
 
           create_snapshot: Create snapshot before deleting storage
 
-          keep_storage: Keep storage after deletion (default: false - storage deleted)
+          keep_storage: @deprecated This option is ignored. Storage is always deleted.
 
           snapshot_name: Custom name for the snapshot
 

@@ -12,7 +12,7 @@ class SandboxDeleteParams(TypedDict, total=False):
     """Create snapshot before deleting storage"""
 
     keep_storage: bool
-    """Keep storage after deletion (default: false - storage deleted)"""
+    """@deprecated This option is ignored. Storage is always deleted."""
 
     snapshot_name: str
     """Custom name for the snapshot"""
