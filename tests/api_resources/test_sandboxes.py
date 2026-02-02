@@ -127,7 +127,7 @@ class TestSandboxes:
         sandbox = client.sandboxes.delete(
             id="id",
             create_snapshot=True,
-            keep_storage=False,
+            keep_storage=True,
             snapshot_name="final-backup",
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
@@ -463,7 +463,7 @@ class TestAsyncSandboxes:
         sandbox = await async_client.sandboxes.delete(
             id="id",
             create_snapshot=True,
-            keep_storage=False,
+            keep_storage=True,
             snapshot_name="final-backup",
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
