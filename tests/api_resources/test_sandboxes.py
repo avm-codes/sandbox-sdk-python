@@ -32,13 +32,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSandboxes:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.create()
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.create(
@@ -54,7 +54,7 @@ class TestSandboxes:
         )
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: SandboxSDK) -> None:
         response = client.sandboxes.with_raw_response.create()
@@ -64,7 +64,7 @@ class TestSandboxes:
         sandbox = response.parse()
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: SandboxSDK) -> None:
         with client.sandboxes.with_streaming_response.create() as response:
@@ -76,13 +76,13 @@ class TestSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.list()
         assert_matches_type(SandboxListResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.list(
@@ -91,7 +91,7 @@ class TestSandboxes:
         )
         assert_matches_type(SandboxListResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: SandboxSDK) -> None:
         response = client.sandboxes.with_raw_response.list()
@@ -101,7 +101,7 @@ class TestSandboxes:
         sandbox = response.parse()
         assert_matches_type(SandboxListResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: SandboxSDK) -> None:
         with client.sandboxes.with_streaming_response.list() as response:
@@ -113,7 +113,7 @@ class TestSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.delete(
@@ -121,18 +121,18 @@ class TestSandboxes:
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_with_all_params(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.delete(
             id="id",
             create_snapshot=True,
-            keep_storage=False,
+            keep_storage=True,
             snapshot_name="final-backup",
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: SandboxSDK) -> None:
         response = client.sandboxes.with_raw_response.delete(
@@ -144,7 +144,7 @@ class TestSandboxes:
         sandbox = response.parse()
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: SandboxSDK) -> None:
         with client.sandboxes.with_streaming_response.delete(
@@ -158,7 +158,7 @@ class TestSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: SandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -166,13 +166,13 @@ class TestSandboxes:
                 id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_all(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.delete_all()
         assert_matches_type(SandboxDeleteAllResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete_all(self, client: SandboxSDK) -> None:
         response = client.sandboxes.with_raw_response.delete_all()
@@ -182,7 +182,7 @@ class TestSandboxes:
         sandbox = response.parse()
         assert_matches_type(SandboxDeleteAllResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete_all(self, client: SandboxSDK) -> None:
         with client.sandboxes.with_streaming_response.delete_all() as response:
@@ -248,7 +248,7 @@ class TestSandboxes:
                 path="path",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_execute(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.execute(
@@ -257,7 +257,7 @@ class TestSandboxes:
         )
         assert_matches_type(SandboxExecuteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_execute_with_all_params(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.execute(
@@ -269,7 +269,7 @@ class TestSandboxes:
         )
         assert_matches_type(SandboxExecuteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_execute(self, client: SandboxSDK) -> None:
         response = client.sandboxes.with_raw_response.execute(
@@ -282,7 +282,7 @@ class TestSandboxes:
         sandbox = response.parse()
         assert_matches_type(SandboxExecuteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_execute(self, client: SandboxSDK) -> None:
         with client.sandboxes.with_streaming_response.execute(
@@ -297,7 +297,7 @@ class TestSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_execute(self, client: SandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -306,7 +306,7 @@ class TestSandboxes:
                 command="python -c \"print('Hello, World!')\"",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.upload(
@@ -315,7 +315,7 @@ class TestSandboxes:
         )
         assert_matches_type(SandboxUploadResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload_with_all_params(self, client: SandboxSDK) -> None:
         sandbox = client.sandboxes.upload(
@@ -325,7 +325,7 @@ class TestSandboxes:
         )
         assert_matches_type(SandboxUploadResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_upload(self, client: SandboxSDK) -> None:
         response = client.sandboxes.with_raw_response.upload(
@@ -338,7 +338,7 @@ class TestSandboxes:
         sandbox = response.parse()
         assert_matches_type(SandboxUploadResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_upload(self, client: SandboxSDK) -> None:
         with client.sandboxes.with_streaming_response.upload(
@@ -353,7 +353,7 @@ class TestSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_upload(self, client: SandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -368,13 +368,13 @@ class TestAsyncSandboxes:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.create()
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.create(
@@ -390,7 +390,7 @@ class TestAsyncSandboxes:
         )
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncSandboxSDK) -> None:
         response = await async_client.sandboxes.with_raw_response.create()
@@ -400,7 +400,7 @@ class TestAsyncSandboxes:
         sandbox = await response.parse()
         assert_matches_type(SandboxCreateResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncSandboxSDK) -> None:
         async with async_client.sandboxes.with_streaming_response.create() as response:
@@ -412,13 +412,13 @@ class TestAsyncSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.list()
         assert_matches_type(SandboxListResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.list(
@@ -427,7 +427,7 @@ class TestAsyncSandboxes:
         )
         assert_matches_type(SandboxListResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncSandboxSDK) -> None:
         response = await async_client.sandboxes.with_raw_response.list()
@@ -437,7 +437,7 @@ class TestAsyncSandboxes:
         sandbox = await response.parse()
         assert_matches_type(SandboxListResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncSandboxSDK) -> None:
         async with async_client.sandboxes.with_streaming_response.list() as response:
@@ -449,7 +449,7 @@ class TestAsyncSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.delete(
@@ -457,18 +457,18 @@ class TestAsyncSandboxes:
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.delete(
             id="id",
             create_snapshot=True,
-            keep_storage=False,
+            keep_storage=True,
             snapshot_name="final-backup",
         )
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncSandboxSDK) -> None:
         response = await async_client.sandboxes.with_raw_response.delete(
@@ -480,7 +480,7 @@ class TestAsyncSandboxes:
         sandbox = await response.parse()
         assert_matches_type(SandboxDeleteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncSandboxSDK) -> None:
         async with async_client.sandboxes.with_streaming_response.delete(
@@ -494,7 +494,7 @@ class TestAsyncSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncSandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -502,13 +502,13 @@ class TestAsyncSandboxes:
                 id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_all(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.delete_all()
         assert_matches_type(SandboxDeleteAllResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete_all(self, async_client: AsyncSandboxSDK) -> None:
         response = await async_client.sandboxes.with_raw_response.delete_all()
@@ -518,7 +518,7 @@ class TestAsyncSandboxes:
         sandbox = await response.parse()
         assert_matches_type(SandboxDeleteAllResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete_all(self, async_client: AsyncSandboxSDK) -> None:
         async with async_client.sandboxes.with_streaming_response.delete_all() as response:
@@ -584,7 +584,7 @@ class TestAsyncSandboxes:
                 path="path",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_execute(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.execute(
@@ -593,7 +593,7 @@ class TestAsyncSandboxes:
         )
         assert_matches_type(SandboxExecuteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_execute_with_all_params(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.execute(
@@ -605,7 +605,7 @@ class TestAsyncSandboxes:
         )
         assert_matches_type(SandboxExecuteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_execute(self, async_client: AsyncSandboxSDK) -> None:
         response = await async_client.sandboxes.with_raw_response.execute(
@@ -618,7 +618,7 @@ class TestAsyncSandboxes:
         sandbox = await response.parse()
         assert_matches_type(SandboxExecuteResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_execute(self, async_client: AsyncSandboxSDK) -> None:
         async with async_client.sandboxes.with_streaming_response.execute(
@@ -633,7 +633,7 @@ class TestAsyncSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_execute(self, async_client: AsyncSandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -642,7 +642,7 @@ class TestAsyncSandboxes:
                 command="python -c \"print('Hello, World!')\"",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.upload(
@@ -651,7 +651,7 @@ class TestAsyncSandboxes:
         )
         assert_matches_type(SandboxUploadResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload_with_all_params(self, async_client: AsyncSandboxSDK) -> None:
         sandbox = await async_client.sandboxes.upload(
@@ -661,7 +661,7 @@ class TestAsyncSandboxes:
         )
         assert_matches_type(SandboxUploadResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncSandboxSDK) -> None:
         response = await async_client.sandboxes.with_raw_response.upload(
@@ -674,7 +674,7 @@ class TestAsyncSandboxes:
         sandbox = await response.parse()
         assert_matches_type(SandboxUploadResponse, sandbox, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncSandboxSDK) -> None:
         async with async_client.sandboxes.with_streaming_response.upload(
@@ -689,7 +689,7 @@ class TestAsyncSandboxes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_upload(self, async_client: AsyncSandboxSDK) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
